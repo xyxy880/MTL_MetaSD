@@ -22,18 +22,6 @@ LEARNING_RATE = 1e-4
 CHECK_POINT_DIR = 'Merge_SR'
 SCALE = 4
 
-'''
-0:MTL
-1:edsr
-2：mzsr
-3：deepsd
-'''
-
-'''
-24个任务：
-4：DeepSD
-5:edsr
-'''
 def build_parser():
     parser = ArgumentParser()
     parser.add_argument('--trial', type=int,dest='trial', help='Trial Number',metavar='trial', default=5)

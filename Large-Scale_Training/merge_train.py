@@ -7,7 +7,7 @@ rootPath = os.path.split(curPath)[0]
 sys.path.append(rootPath)
 
 import time
-from Models import edsr_x4 as model
+from Models import MetaSD_x4 as model
 from imresize import imresize
 from utils import *
 
@@ -95,11 +95,6 @@ class Train(object):
                 try:
                     label_train_, input_train_ = sess.run([label_train, input_train])
 
-                    # input_bic_=np.zeros(label_train_.shape)
-                    # for idx in range(len(label_train_)):
-                    #     input_bic_[idx]=imresize(input_train_[idx], scale=self.scale, kernel='cubic')
-                    # sess.run(self.opt, feed_dict={self.input: input_bic_, self.label: label_train_})
-
                     sess.run(self.opt, feed_dict={self.input: input_train_, self.label: label_train_})
 
 
@@ -108,9 +103,6 @@ class Train(object):
                     if step % 10000 == 0:
                         t1 = t2
                         t2 = time.time()
-                        # loss_, summary = sess.run([self.loss, self.summary_op],
-                        #                           feed_dict={self.input: input_bic_,
-                        #                                      self.label: label_train_})
                         loss_, summary = sess.run([self.loss, self.summary_op],
                                                   feed_dict={self.input: input_train_,
                                                              self.label: label_train_})

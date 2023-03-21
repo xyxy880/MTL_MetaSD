@@ -7,7 +7,7 @@ rootPath = os.path.split(curPath)[0]
 sys.path.append(rootPath)
 
 import time
-from Models import deepsd as model
+from Models import MetaSD_x4 as model
 from imresize import imresize
 from utils import *
 
@@ -98,9 +98,7 @@ class Train(object):
                     input_bic_=np.zeros(label_train_.shape)
                     for idx in range(len(label_train_)):
                         input_bic_[idx]=imresize(input_train_[idx], scale=self.scale, kernel='cubic')
-                    sess.run(self.opt, feed_dict={self.input: input_bic_, self.label: label_train_})
-                    #
-                    # sess.run(self.opt, feed_dict={self.input: input_train_, self.label: label_train_})
+                    sess.run(self.opt, feed_dict={self.input: input_train_, self.label: label_train_})
 
 
                     step = step + 1
@@ -109,11 +107,8 @@ class Train(object):
                         t1 = t2
                         t2 = time.time()
                         loss_, summary = sess.run([self.loss, self.summary_op],
-                                                  feed_dict={self.input: input_bic_,
+                                                  feed_dict={self.input: input_train_,
                                                              self.label: label_train_})
-                        # loss_, summary = sess.run([self.loss, self.summary_op],
-                        #                           feed_dict={self.input: input_train_,
-                        #                                      self.label: label_train_})
 
                         print('Iteration:', step, 'Loss:', loss_, 'LR:', sess.run(self.lr), 'Time: %.2f' % (t2-t1))
 

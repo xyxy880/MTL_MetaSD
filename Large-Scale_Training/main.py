@@ -22,9 +22,6 @@ LEARNING_RATE = 4e-4
 CHECK_POINT_DIR = 'SR'
 SCALE = 8
 
-'''
-0:MZSR预训练
-'''
 def build_parser():
     parser = ArgumentParser()
     parser.add_argument('--trial', type=int,dest='trial', help='Trial Number',metavar='trial', default=0)

@@ -7,7 +7,7 @@ rootPath = os.path.split(curPath)[0]
 sys.path.append(rootPath)
 
 from utils import *
-from Models import deepsd as model
+from Models import MetaSD_x4 as model
 import time
 from config import *
 
